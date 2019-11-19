@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Hello World!</title>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<script type="text/javascript" src='scripts/application.js'></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+	<br><br>
+	<p class="head_ecommercinho">
+		<h1 class="display-1 text-center">CADASTRO</h1>
+		<h3 class="text-center">O melhor ecommerce da cidade</h3>
+	</p><br><br>
+	<p>
+		<a href="carrinho.html" class="btn btn-primary">Voltar para o Carrinho</a>
+	</p>
+
+
+	<p>
+		<div class="m-5">
+			<form action="pagamento.html">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label >Nome</label>
+						<input type="text" class="form-control" placeholder="Nome completo" id="form_name" required>
+
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label for="inputEmail4">E-mail</label>
+						<input type="email" class="form-control" id="form_email" placeholder="Email" required>
+					</div>
+					<div class="form-group col-md-6">
+						<label for="inputPassword4">Senha</label>
+						<input type="password" class="form-control" id="form_senha" placeholder="Senha" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="inputAddress">Enredeço</label>
+					<input type="text" class="form-control" id="form_address" placeholder="Endereço" required>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-8">
+						<label for="inputCity">Cidade</label>
+						<input type="text" class="form-control" id="form_cidade" placeholder="Cidade" required>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="inputState">Região</label>
+						<select id="form_regiao" class="form-control">
+							<option>Sudeste</option>
+							<option>Sul</option>
+							<option>Norte</option>
+							<option>Nordeste</option>
+							<option>Centro-Oeste</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<script type="text/javascript">
+				function valida_info_form_cadastro(){
+					val_obj = []
+					valores_cadastro = Object.keys(localStorage)
+					for(var cd = 0; cd < valores_cadastro.length; cd++){
+						ch_cd = valores_cadastro[cd]
+						vl_cd = localStorage.getItem(String(ch_cd))
+
+						if(ch_cd.includes('form_')){
+							val_obj.push(vl_cd)
+						}
+					}
+					localStorage.setItem("form_nome", String($('#form_name').val()))
+					localStorage.setItem("form_email", String($('#form_email').val()))
+					localStorage.setItem("form_senha", String($('#form_senha').val()))
+					localStorage.setItem("form_address", String($('#form_address').val()))
+					localStorage.setItem("form_cidade", String($('#form_cidade').val()))
+					localStorage.setItem("form_regiao", String($('#form_regiao').val()))
+
+					return val_obj.includes('')
+				}
+
+				function valida_avanco_processo(){
+					vlf = valida_info_form_cadastro()
+					if(valida_info_form_cadastro()){
+						alert('PREENCHA TODOS OS VALORES DO FORMULÁRIO CORRETAMENTE!')
+						valida_info_form_cadastro()
+
+					}
+					else {
+						document.location.pathname = '/pagamento.html'
+						valida_info_form_cadastro()
+					}
+				}
+
+			</script>
+			<a href="#" onmousedown="valida_avanco_processo()" class="btn btn-primary">Página de pagamento</a>
+			
+		</form>
+	</div>
+</p>
+
+</body>
+</html>

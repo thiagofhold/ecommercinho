@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>Hello World!</title>
+	<link rel="stylesheet" type="text/css" href="style/style.css">
+	<script type="text/javascript" src='scripts/application.js'></script>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+<body>
+	<script type="text/javascript">
+		function valor_total_produto(){
+			pd_valor = Number(window.ecObj.products[localStorage.getItem('produto_adicionado')]['preço'])
+			pd_frete = Number(window.ecObj.frete[localStorage.getItem('form_regiao')])
+			vf_pd = String(Number(pd_valor+pd_frete).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))
+			return vf_pd
+		}
+	</script>
+	<br><br>
+	<p class="head_ecommercinho">
+		<h1 class="display-1 text-center">PAGAMENTO</h1>
+		<h3 class="text-center">O melhor ecommerce da cidade</h3>
+	</p><br><br>
+	<p>
+		<a href="cadastro.html" class="btn btn-primary">Voltar para o Carrinho</a>
+	</p>
+
+	<p>
+		<div class="container">
+			<div class="row">
+				<div class="col-8 border border-secondary">
+					
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th scope="col"><h3>#</h3></th>
+								<th scope="col"><h3>Caracteristica:</h3></th>
+							</tr>
+
+						</thead>
+						<tbody>
+							<tr>
+								<script type="text/javascript">
+									pdts = ecObj.products[String(retorna_produto())]
+									obj_pdts = Object.keys(pdts)
+
+									for (var i = 0; i < obj_pdts.length; i++){
+										ch_pdt = obj_pdts[i]
+										vl_pdt = pdts[ch_pdt]
+
+										if (ch_pdt != 'path_photo'){
+											console.log(ch_pdt)
+											console.log(vl_pdt)
+											document.write('<tr>')
+											document.write('<th scope"row"><h3>'+String(ch_pdt).charAt(0).toUpperCase() + String(ch_pdt).slice(1)+'</h3></th>')
+											document.write('<td><h3>'+String(vl_pdt).charAt(0).toUpperCase() + String(vl_pdt).slice(1)+'</h3></td>')
+											document.write('</tr>')
+										}
+									}
+								</script>
+							</tr>
+							<tr>
+								<th scope="row"><h3>Frete:</h3></th>
+								<td>
+									<script type="text/javascript">
+										document.write('<h3>'+String(Number(window.ecObj.frete[localStorage.getItem('form_regiao')]).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }))+'</h3>')
+									</script>
+								</td>
+							</tr>
+							<tr>
+								<th scope="row"><h3>Valor total do pedido:</h3></th>
+								<td>
+									<script type="text/javascript">
+										document.write('<h3>'+valor_total_produto()+'</h3>')
+									</script>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+				<div class="col-4 border border-secondary">
+					<div id="surprise" class="text-center"></div>
+					<script type="text/javascript">
+						path_foto = window.ecObj.products[String(localStorage.getItem("produto_adicionado"))]['path_photo']
+						document.getElementById("surprise").innerHTML="<img src='"+path_foto+"' />";
+					</script>
+				</div>
+			</div>
+		</p>
+		<a href="processando_pagamento.html" class="btn btn-primary">Comprar!</a>
+
+	</body>
+	</html>
